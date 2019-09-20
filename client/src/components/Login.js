@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { axiosWithAuth } from "./AxiosWithAuth";
-import { Redirect } from "react-router-dom";
 
 const Login = props => {
   // make a post request to retrieve a token from the api
