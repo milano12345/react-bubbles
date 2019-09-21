@@ -24,7 +24,7 @@ const ColorList = ({ colors, updateColors }) => {
     e.preventDefault();
     console.log(e);
     axiosWithAuth()
-      .put(`/api/colors/:id`, colorToEdit)
+      .put(`/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
         updateColors(
           colors.map(color => {
@@ -41,7 +41,7 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is is saved right now?
   };
-  //ONE WAY TO DO IT
+
   // const deleteColor = color => {
   //   // make a delete request to delete this color
   //   console.log(color);
@@ -55,16 +55,19 @@ const ColorList = ({ colors, updateColors }) => {
   //       .catch(err => console.log(err));
   //   }
   // };
-  //ANOTHER WAY TO DO IT
-
   const deleteColor = color => {
     axiosWithAuth()
       .delete(`/api/colors/${color.id}`)
       .then(res => {
-        console.log(res);
-      });
+        const newColors = colors.filter(item => {
+          if (item.id !== color.id) {
+            return item;
+          }
+        });
+        updateColors(newColors);
+      })
+      .catch(err => console.log(err));
   };
-
   return (
     <div className="colors-wrap">
       <p>colors</p>
