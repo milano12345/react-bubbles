@@ -41,19 +41,28 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is is saved right now?
   };
+  //ONE WAY TO DO IT
+  // const deleteColor = color => {
+  //   // make a delete request to delete this color
+  //   console.log(color);
+  //   if (window.confirm("Are you sure you want to delete?")) {
+  //     axiosWithAuth()
+  //       .delete(`/api/colors/${color.id}`)
+  //       .then(res => {
+  //         console.log(res);
+  //         window.location.reload();
+  //       })
+  //       .catch(err => console.log(err));
+  //   }
+  // };
+  //ANOTHER WAY TO DO IT
 
   const deleteColor = color => {
-    // make a delete request to delete this color
-    console.log(color);
-    if (window.confirm("Are you sure you want to delete?")) {
-      axiosWithAuth()
-        .delete(`/api/colors/${color.id}`)
-        .then(res => {
-          console.log(res);
-          window.location.reload();
-        })
-        .catch(err => console.log(err));
-    }
+    axiosWithAuth()
+      .delete(`/api/colors/${color.id}`)
+      .then(res => {
+        console.log(res);
+      });
   };
 
   return (
